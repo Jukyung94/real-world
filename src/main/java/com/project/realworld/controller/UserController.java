@@ -1,22 +1,17 @@
 package com.project.realworld.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.project.realworld.dto.RegisterUserRequest;
-import com.project.realworld.repository.UserRepository;
 import com.project.realworld.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
+@RequiredArgsConstructor
 public class UserController {
-//    @GetMapping("/api/hello")
-//    public String hello() {
-//        return "hello";
-//    }
 
     private final UserService userService;
 
@@ -25,10 +20,15 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/aa")
+    public String test() {
+        return "hello";
+    }
+
+    //Post Request로 회원정보 받아서 서비스로 넘겨주기
     @PostMapping("/")
-    public String register(@RequestBody RegisterUserRequest request) {
-       if(userService.register(request)) return "register success";
-       else return "register failed";
+    public ResponseEntity<String> register(@RequestBody RegisterUserRequest request) throws JsonProcessingException {
+        return ResponseEntity.ok(userService.register(request));
     }
 
 
