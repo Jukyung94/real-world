@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.project.realworld.dto.LoginUserRequest;
 import com.project.realworld.dto.RegisterUserRequest;
 import com.project.realworld.service.UserService;
+import jakarta.validation.Valid;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,13 +29,13 @@ public class UserController {
     }
 
     //Post Request로 회원정보 받아서 서비스로 넘겨주기
-    @PostMapping("/")
-    public ResponseEntity<String> register(@RequestBody RegisterUserRequest request) throws JsonProcessingException {
+    @PostMapping("")
+    public ResponseEntity<String> register(final @Valid @RequestBody RegisterUserRequest request) throws Exception {
         return ResponseEntity.ok(userService.register(request));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginUserRequest request) throws JsonProcessingException {
+    public ResponseEntity<String> login(final @Valid @RequestBody LoginUserRequest request) throws Exception {
         return ResponseEntity.ok(userService.login(request));
     }
 
