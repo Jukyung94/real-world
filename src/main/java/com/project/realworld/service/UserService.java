@@ -20,15 +20,21 @@ public class UserService {
         realWorldUser.setUsername(request.getUsername());
         realWorldUser.setEmail(request.getEmail());
         realWorldUser.setPassword(request.getPassword());
-        userRepository.registration(realWorldUser);
-        return ObjectCreater(realWorldUser);
+        if(userRepository.registration(realWorldUser).equals("success")) {
+            return ObjectCreater(realWorldUser);
+        } else {
+            return "The user already exist.";
+        }
+
     }
 
     public String login(LoginUserRequest request) throws JsonProcessingException {
         RealWorldUser realWorldUser = new RealWorldUser();
         realWorldUser.setEmail(request.getEmail());
         realWorldUser.setPassword(request.getPassword());
-        return ObjectCreater(realWorldUser);
+        if(userRepository.login(realWorldUser).equals("success")) return ObjectCreater(realWorldUser);
+        else return "Invalid user login failed";
+
     }
 
     public String ObjectCreater(RealWorldUser realWorldUser) throws JsonProcessingException {

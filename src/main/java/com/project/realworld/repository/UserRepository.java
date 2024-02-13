@@ -7,6 +7,7 @@ import lombok.Builder;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Builder
 @JsonRootName("user")
@@ -14,9 +15,43 @@ public class UserRepository {
     Map<Long, RealWorldUser> userMap = new HashMap();
     Long i = 0L;
     public String registration(RealWorldUser realWorldUser) {
-        userMap.put(i, realWorldUser);
-        i++;
-        System.out.println(userMap.size());
-        return "user added";
+        var values = userMap.values();
+        boolean isUserExist = false;
+
+        //Map에서 유저가 있는지 검증
+        if(values.isEmpty()) {
+            userMap.put(i, realWorldUser);
+            i++;
+            isUserExist = false;
+        } else {
+            for (RealWorldUser value : values) {
+                if(Objects.equals(value.email, realWorldUser.email)) {
+                    isUserExist = true;
+                } else {
+                    userMap.put(i, realWorldUser);
+                    i++;
+                    isUserExist = false;
+                }
+            }
+        }
+        if(!isUserExist) return "success";
+        else return "user already exist";
+    }
+
+    public String login(RealWorldUser realWorldUser) {
+        var values = userMap.values();
+        boolean isUserExist = false;
+
+        //Map에서 유저가 있는지 검증
+        if(values.isEmpty()) {
+            isUserExist = false;
+        } else {
+            for (RealWorldUser value : values) {
+                System.out.println(value);
+                isUserExist = Objects.equals(value.email, realWorldUser.email);
+            }
+        }
+        if(!isUserExist) return "failed";
+        else return "success";
     }
 }
