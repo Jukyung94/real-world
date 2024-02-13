@@ -1,9 +1,6 @@
 package com.project.realworld.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
@@ -12,7 +9,4 @@ import lombok.NoArgsConstructor;
 public class Response {
     private String response;
 
-    public Response(String response) {
-        this.response = response;
-    }
 }

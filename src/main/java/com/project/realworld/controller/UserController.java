@@ -1,6 +1,7 @@
 package com.project.realworld.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.project.realworld.dto.LoginUserRequest;
 import com.project.realworld.dto.RegisterUserRequest;
 import com.project.realworld.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,11 @@ public class UserController {
     @PostMapping("/")
     public ResponseEntity<String> register(@RequestBody RegisterUserRequest request) throws JsonProcessingException {
         return ResponseEntity.ok(userService.register(request));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginUserRequest request) throws JsonProcessingException {
+        return ResponseEntity.ok(userService.login(request));
     }
 
 

@@ -1,5 +1,6 @@
 package com.project.realworld.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,14 +12,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonRootName("user")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RealWorldUser {
     public String username;
     public String email;
     public String password;
 
-    public RealWorldUser(String username, String email, String password) {
+    public void setUsername(String username) {
         this.username = username;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setPassword(String password) {
         this.password = password;
     }
 
