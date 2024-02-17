@@ -1,19 +1,15 @@
 package com.project.realworld.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.project.realworld.dto.LoginUserRequest;
 import com.project.realworld.dto.RegisterUserRequest;
 import com.project.realworld.service.UserService;
 import jakarta.validation.Valid;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
-@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;

@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import com.project.realworld.dto.RegisterUserRequest;
 import com.project.realworld.entity.RealWorldUser;
 import lombok.Builder;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-@Builder
-@JsonRootName("user")
+@Repository
 public class UserRepository {
     Map<Long, RealWorldUser> userMap = new HashMap();
     Long i = 0L;
