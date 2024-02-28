@@ -2,6 +2,7 @@ package com.project.realworld.controller;
 
 import com.project.realworld.dto.LoginUserRequest;
 import com.project.realworld.dto.RegisterUserRequest;
+import com.project.realworld.entity.RealWorldUser;
 import com.project.realworld.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@ResponseBody
 @RequestMapping("/api/users")
 public class UserController {
 
@@ -31,9 +33,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    @ResponseBody
-    public void login(final @Valid @RequestBody LoginUserRequest request) throws Exception {
-        ResponseEntity.ok(userService.login(request));
+    public RealWorldUser login(final @Valid @RequestBody LoginUserRequest request) throws Exception {
+        var user = userService.login(request);
+        return user;
     }
 
 

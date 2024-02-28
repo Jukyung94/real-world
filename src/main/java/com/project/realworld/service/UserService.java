@@ -28,12 +28,12 @@ public class UserService {
 
     }
 
-    public String login(LoginUserRequest request) throws JsonProcessingException {
+    public RealWorldUser login(LoginUserRequest request) throws JsonProcessingException {
         RealWorldUser realWorldUser = new RealWorldUser();
         realWorldUser.setEmail(request.getEmail());
         realWorldUser.setPassword(request.getPassword());
-        if(userRepository.login(realWorldUser).equals("success")) return ObjectCreater(realWorldUser);
-        else return "Invalid user login failed";
+        if(userRepository.login(realWorldUser).equals("success")) return realWorldUser;
+        else return realWorldUser;
 
     }
 
