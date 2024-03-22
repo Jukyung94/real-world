@@ -6,29 +6,39 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.project.realworld.dto.LoginUserRequest;
 import com.project.realworld.dto.RegisterUserRequest;
 import com.project.realworld.entity.RealWorldUser;
+import com.project.realworld.entity.Response;
 import com.project.realworld.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository = new UserRepository();
 
-    public String register(RegisterUserRequest request) throws JsonProcessingException {
+    public Response register(RegisterUserRequest request) throws JsonProcessingException {
         RealWorldUser realWorldUser = new RealWorldUser();
-        realWorldUser.setUsername(request.getUsername());
-        realWorldUser.setEmail(request.getEmail());
-        realWorldUser.setPassword(request.getPassword());
+        realWorldUser.setUserInfo(request.getList());
+
         if(userRepository.registration(realWorldUser).equals("success")) {
-            return ObjectCreater(realWorldUser);
+            return Response.builder()
+                    .code("200")
+                    .message("register success")
+                    .data(ObjectCreater(realWorldUser))
+                    .build();
         } else {
-            return "The user already exist.";
+            return Response.builder()
+                    .code("-300")
+                    .message("The user already exist.")
+                    .data("")
+                    .build();
         }
 
     }
 
-    public RealWorldUser login(LoginUserRequest request) throws JsonProcessingException {
+    public RealWorldUser login(LoginUserRequest request) {
         RealWorldUser realWorldUser = new RealWorldUser();
         realWorldUser.setEmail(request.getEmail());
         realWorldUser.setPassword(request.getPassword());
@@ -36,6 +46,7 @@ public class UserService {
         else return realWorldUser;
 
     }
+
 
     public String ObjectCreater(RealWorldUser realWorldUser) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();

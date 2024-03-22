@@ -12,7 +12,7 @@ import java.util.Objects;
 
 @Repository
 public class UserRepository {
-    Map<Long, RealWorldUser> userMap = new HashMap();
+    Map<Long, RealWorldUser> userMap = new HashMap<>();
     Long i = 0L;
     public String registration(RealWorldUser realWorldUser) {
         var values = userMap.values();
