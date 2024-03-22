@@ -2,6 +2,7 @@ package com.project.realworld.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.project.realworld.dto.RegisterUserRequest;
 import lombok.*;
 
 import java.util.List;
@@ -39,5 +40,11 @@ public class RealWorldUser {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setUserInfo(RegisterUserRequest request) {
+        this.username = request.getUsername();
+        this.email = request.getEmail();
+        this.password = request.getPassword();
     }
 }

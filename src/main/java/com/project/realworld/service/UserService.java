@@ -18,24 +18,23 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository = new UserRepository();
 
-    public Response register(RegisterUserRequest request) throws JsonProcessingException {
+    public Response register(RegisterUserRequest request) throws Exception {
         RealWorldUser realWorldUser = new RealWorldUser();
-        realWorldUser.setUserInfo(request.getList());
-
-        if(userRepository.registration(realWorldUser).equals("success")) {
+        realWorldUser.setUserInfo(request);
+        try {
+            userRepository.registration(realWorldUser);
             return Response.builder()
                     .code("200")
                     .message("register success")
                     .data(ObjectCreater(realWorldUser))
                     .build();
-        } else {
+        } catch (Exception e) {
             return Response.builder()
                     .code("-300")
-                    .message("The user already exist.")
+                    .message(e.getMessage())
                     .data("")
                     .build();
         }
-
     }
 
     public RealWorldUser login(LoginUserRequest request) {
