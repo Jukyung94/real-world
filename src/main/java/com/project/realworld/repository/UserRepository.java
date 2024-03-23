@@ -12,12 +12,11 @@ import java.util.Objects;
 public class UserRepository {
     Map<String, RealWorldUser> userMap = new HashMap<>();
     public void registration(RealWorldUser realWorldUser) throws Exception {
-            System.out.println(realWorldUser.getEmail());
-            if(!userMap.containsKey(realWorldUser.getEmail())) {
-                userMap.put(realWorldUser.getEmail(), realWorldUser);
-            } else {
-                throw new Exception("The user already exist");
-            }
+        System.out.println(realWorldUser.getEmail());
+        if(userMap.containsKey(realWorldUser.getEmail())) {
+            throw new Exception("The user already exist");
+        }
+        userMap.put(realWorldUser.getEmail(), realWorldUser);
     }
 
     public String login(RealWorldUser realWorldUser) {
