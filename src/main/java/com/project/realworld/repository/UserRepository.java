@@ -1,7 +1,9 @@
 package com.project.realworld.repository;
 
 
+import com.project.realworld.dto.LoginUserRequest;
 import com.project.realworld.entity.RealWorldUser;
+import com.project.realworld.entity.Response;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -14,25 +16,20 @@ public class UserRepository {
     public void registration(RealWorldUser realWorldUser) throws Exception {
         System.out.println(realWorldUser.getEmail());
         if(userMap.containsKey(realWorldUser.getEmail())) {
-            throw new Exception("The user already exist");
+            throw new Exception("User already exist");
         }
         userMap.put(realWorldUser.getEmail(), realWorldUser);
     }
 
-    public String login(RealWorldUser realWorldUser) {
-        var values = userMap.values();
-        boolean isUserExist = false;
-
-        //Map에서 유저가 있는지 검증
-        if(values.isEmpty()) {
-            isUserExist = false;
-        } else {
-            for (RealWorldUser value : values) {
-                System.out.println(value);
-                isUserExist = Objects.equals(value.email, realWorldUser.email);
-            }
+    public RealWorldUser login(LoginUserRequest request) throws Exception{
+        if(!userMap.containsKey(request.getEmail())) {
+            throw new Exception("email or password is invalid");
         }
-        if(!isUserExist) return "failed";
-        else return "success";
+        RealWorldUser user = userMap.get(request.getEmail());
+        if(!user.getEmail().equals(request.getEmail()) ||
+            !user.getPassword().equals(request.getPassword())) {
+            throw new Exception("email or password is invalid");
+        }
+        return user;
     }
 }

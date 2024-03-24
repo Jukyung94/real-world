@@ -1,9 +1,13 @@
 package com.project.realworld.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.project.realworld.dto.LoginUserRequest;
 import com.project.realworld.dto.RegisterUserRequest;
 import com.project.realworld.entity.RealWorldUser;
 import com.project.realworld.entity.Response;
+import com.project.realworld.entity.UserResponse;
 import com.project.realworld.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +36,21 @@ public class UserController {
 
     //Post Request로 회원정보 받아서 서비스로 넘겨주기
     @PostMapping("")
-    public ResponseEntity<Response> register(final @Valid @RequestBody RegisterUserRequest request) throws Exception {
-        return ResponseEntity.ok(userService.register(request));
+    public ResponseEntity<?> register(final @Valid @RequestBody RegisterUserRequest request) throws Exception {
+        return ResponseEntity.ok(ObjectCreater(userService.register(request)));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<RealWorldUser> login(final @Valid @RequestBody LoginUserRequest request) throws Exception {
-        var user = userService.login(request);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<?> login(final @Valid @RequestBody LoginUserRequest request) throws Exception {
+        return ResponseEntity.ok(ObjectCreater(userService.login(request)));
     }
 
+    public String ObjectCreater(UserResponse realWorldUser) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+        String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(realWorldUser);
+        System.out.println(jsonString);
+        return jsonString;
+    }
 
 }

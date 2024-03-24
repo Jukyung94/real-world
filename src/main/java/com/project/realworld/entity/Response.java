@@ -14,4 +14,5 @@ public class Response {
 
     @JsonRawValue
     private Object data;
+
 }

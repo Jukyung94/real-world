@@ -39,8 +39,4 @@ public class RegisterUserRequest {
     public String getPassword() {
         return password;
     }
-
-    public List<String> getList() {
-        return List.of(username, email, password);
-    }
 }

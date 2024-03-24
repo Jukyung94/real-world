@@ -17,32 +17,12 @@ public class RealWorldUser {
     public String username;
     public String email;
     public String password;
+    public String token;
+    public String bio;
+    public String image;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setUserInfo(RegisterUserRequest request) {
+    public RealWorldUser(RegisterUserRequest request) {
         this.username = request.getUsername();
         this.email = request.getEmail();
         this.password = request.getPassword();
