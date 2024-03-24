@@ -20,6 +20,7 @@ import java.util.List;
 @RestController
 @ResponseBody
 @RequestMapping("/api/users")
+@CrossOrigin("*")
 public class UserController {
 
     private final UserService userService;
