@@ -12,7 +12,7 @@ import java.util.List;
 @JsonRootName("user")
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RealWorldUser {
     public String username;
     public String email;

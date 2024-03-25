@@ -22,7 +22,7 @@ public class UserService {
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .bio("I work at statefarm")
-                .image("")
+                .image(null)
                 .token("token")
                 .build();
     }
@@ -33,7 +33,7 @@ public class UserService {
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .bio("I work at statefarm")
-                .image("")
+                .image(null)
                 .token("token")
                 .build();
 
