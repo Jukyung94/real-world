@@ -6,16 +6,11 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.project.realworld.dto.LoginUserRequest;
 import com.project.realworld.dto.RegisterUserRequest;
 import com.project.realworld.entity.RealWorldUser;
-import com.project.realworld.entity.Response;
-import com.project.realworld.entity.UserResponse;
 import com.project.realworld.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @ResponseBody
@@ -46,7 +41,7 @@ public class UserController {
         return ResponseEntity.ok(ObjectCreater(userService.login(request)));
     }
 
-    public String ObjectCreater(UserResponse realWorldUser) throws JsonProcessingException {
+    public String ObjectCreater(RealWorldUser realWorldUser) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
         String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(realWorldUser);
