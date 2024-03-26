@@ -3,12 +3,10 @@ package com.project.realworld.repository;
 
 import com.project.realworld.dto.LoginUserRequest;
 import com.project.realworld.entity.RealWorldUser;
-import com.project.realworld.entity.Response;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @Repository
 public class UserRepository {

@@ -3,7 +3,9 @@ package com.project.realworld.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
+@Data
 public class LoginUserRequest {
 
     @NotNull
@@ -16,11 +18,4 @@ public class LoginUserRequest {
     @NotEmpty
     private String password;
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
 }

@@ -5,14 +5,12 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import com.project.realworld.dto.RegisterUserRequest;
 import lombok.*;
 
-import java.util.List;
-
 @Data
 @Builder
 @JsonRootName("user")
 @AllArgsConstructor
 @NoArgsConstructor
-//@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RealWorldUser {
     public String username;
     public String email;
